@@ -1,0 +1,9 @@
+2018-01-12T13:46:08.638Z ERROR   HLFConnectionManager    :fabric-client()          [Client.js]: Failed to load user "Admin" from local key value store. Error: Error: name mismatch: 'admin' does not equal 'Admin'
+    at User.fromString (/Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/User.js:211:10)
+    at /Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/Client.js:975:22
+    at <anonymous> {}$
+2018-01-12T13:46:08.638Z ERROR   HLFConnectionManager    :fabric-client()          [Client.js]: Failed to load an instance of requested user "Admin" from the state store on this Client instance. Error: Error: name mismatch: 'admin' does not equal 'Admin'
+    at User.fromString (/Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/User.js:211:10)
+    at /Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/Client.js:975:22
+    at <anonymous> {}$
+2018-01-12T13:46:08.639Z ERROR   HLFConnection           :login()                  {"message":"name mismatch: 'admin' does not equal 'Admin'","stack":"Error: name mismatch: 'admin' does not equal 'Admin'\n    at User.fromString (/Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/User.js:211:10)\n    at /Users/hannahredler/repos/CodeWorks/solo-project/time-is-money/server/node_modules/fabric-client/lib/Client.js:975:22\n    at <anonymous>"}$
