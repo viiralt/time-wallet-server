@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   database: 'time_currency',
   user:'root',
-  password:'Br33lpkel'
+  password:'root'
 })
 
 connection.connect();

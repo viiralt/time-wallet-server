@@ -5,9 +5,9 @@ const mysql = require('mysql');
 require('dotenv').config();
 
 const connection = mysql.createConnection({
-  database: process.env.DB_NAME,
-  user:process.env.DB_USER,
-  password:process.env.DB_PASS
+  database: 'time_currency',
+  user:'root',
+  password:'root'
 })
 
 exports.createTask = (ctx) => {
