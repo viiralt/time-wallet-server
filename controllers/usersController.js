@@ -26,7 +26,7 @@ const encryptPassword = (password) => {
 }
 
 
-exports.addProfiles = async(ctx) => {
+exports.addProfiles = async(ctx) =>{
 
   // check if email already exists
   const doesEmailExist = await usersDb.doesItExist("email", ctx.request.body.email);
@@ -42,14 +42,14 @@ exports.addProfiles = async(ctx) => {
 
   ctx.request.body.balance = 240;
   ctx.request.body.password = encryptPassword(ctx.request.body.password)
-  ctx.request.body.picture = "";
+  //ctx.request.body.picture = "";
 
   // add user to blockchain
   usersBC.addUser(ctx, userId)
 
   // add new wallet to the blockchain
-  const walletId = commoditiesBC.addWallet(ctx, userId)
-  ctx.request.body.walletId = walletId;
+  const wallet = commoditiesBC.addWallet(ctx, userId)
+  ctx.request.body.wallet = await wallet;
   // .then(usersRegistry => { usersRegistry.getAll().then(users => {console.log('users', users)})})
 
   //add to my database

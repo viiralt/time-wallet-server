@@ -19,6 +19,7 @@ const authorize = async (ctx, next) => {
 };
 
 router.get('/testPayment', )
+router.post('/createUser', usersController.addProfiles)
 
 router.get("/me", authorize, usersController.me)
 
