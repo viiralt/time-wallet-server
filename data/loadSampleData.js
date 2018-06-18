@@ -20,8 +20,8 @@ const tasks = JSON.parse(fs.readFileSync(`${__dirname}/tasks.json`, 'utf-8'));
 async function deleteData() {
   console.log(`😢😢 too-da-loo, data...\n`);
   
-  await users.remove();
-  await tasks.remove();
+  await users.delete();
+  await tasks.delete();
 
   console.log('Data deleted. To load sample data, run:\n\n\t npm run sample\n\n');
   process.exit();
