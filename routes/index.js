@@ -8,7 +8,7 @@ const { authorizeUser } = require('../handlers/authHandlers.js');
 
 const usersDb = require('../models/usersDb.js');
 
-router.get('/me', authorizeUser, usersController.me); 
+router.get('/me', authorizeUser, usersController.me);
 
 router.get('/test', async (ctx) => {
   // console.log(ctx.businessNetwork.getAssetRegistry('org.acme.biznet.Commodity'));
@@ -25,8 +25,8 @@ router.get('/users/:id', usersController.getUser);
 router.post('/users', usersController.addProfiles);
 
 router.get('/tasks', authorizeUser, tasksController.searchTasks);
-router.post('/tasks', authorizeUser, tasksController.createTask);
-router.put('/tasks/:id', authorizeUser, tasksController.updateTask); 
+router.post('/task', authorizeUser, tasksController.createTask);
+router.put('/tasks/:id', authorizeUser, tasksController.updateTask);
 router.delete('/tasks/:id', authorizeUser, tasksController.deleteTask);
 
 router.get('/myasktasks', authorizeUser, tasksController.getMyAskTasks);

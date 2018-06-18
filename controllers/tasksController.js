@@ -1,6 +1,8 @@
 const tasksDb = require('../models/tasksDb');
+const usersDb = require('../models/usersDb');
 
-exports.createTask = (ctx) => {
+exports.createTask = async (ctx) => {
+  ctx.Id = ctx.user.userid;
   tasksDb.createTask(ctx);
   ctx.status= 200;
 };

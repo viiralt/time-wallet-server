@@ -41,6 +41,15 @@ exports.addUser = (ctx) => {
 //    })
 //   })
 // }
+exports.insertToken = (user, value) => {
+  return new Promise((resolve, reject) => {
+    connection.query(`UPDATE users SET token = "${value}" WHERE userid ="${user}"`, (error, results) => {
+      if (error) reject(error);
+      else resolve(results.length>0);
+    });
+  });
+};
+
 
 exports.doesItExist = (field, value) => {
   return new Promise((resolve, reject) => {

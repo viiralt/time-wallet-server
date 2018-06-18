@@ -11,22 +11,25 @@ const connection = mysql.createConnection({
 });
 
 exports.createTask = (ctx) => {
+  const userId = ctx.Id;
+  console.log(userId);
   const taskId = services.generateCode();
-  taskId: taskId;
-  userAsk: ctx.request.body.userAsk;
-  userDo: "";
-  location: "";
-  title: ctx.request.body.title;
-  description: ctx.request.body.description;
-  status: 'Submitted';
-  time: ctx.request.body.time;
-  userAskName: ctx.request.body.userAskName;
-
+  const task = {
+    taskId: taskId,
+    userAsk: userId,
+    userDo: "",
+    location: "",
+    title: ctx.request.body.title,
+    description: ctx.request.body.description,
+    status: 'Submitted',
+    time: ctx.request.body.time,
+    userAskName: ctx.request.body.userAskName,
+  };
   // ctx.request.body.taskId = taskId;
   // ctx.request.body.userAsk = ctx.user.userId;
   // ctx.request.body.userDo = "";
   // ctx.request.body.status = 'Submitted';
-  const query = connection.query(`INSERT into tasks SET ?`, ctx.request.body, (error) => {
+  const query = connection.query(`INSERT into tasks SET ?`, task, (error) => {
     if (error) throw error;
   });
 
