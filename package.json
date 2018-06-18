@@ -20,5 +20,9 @@
     "koa-router": "^7.3.0",
     "mysql": "^2.15.0",
     "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
   }
 }

@@ -1,43 +1,34 @@
-
 const Koa = require('koa');
-const app = new Koa();
 const bodyParser = require('koa-bodyparser');
-const logger = require('koa-logger');
 const cors = require('kcors');
-const conf = require('./config.js');
-const routes = require('./routes.js');
-const blockchain = require('./blockchain.js')
-const userDb = require('./models/usersDb.js')
+const logger = require('koa-logger');
+const blockchain = require('./blockchain.js');
 
-console.log(bodyParser);
-app.use(logger());
-app.use(bodyParser());
-app.use(cors());
-app.use(blockchain)
+const userDb = require('./models/usersDb.js');
+const errorHandlers = require('./handlers/errorHandlers');
 
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    ctx.body = undefined;
-    switch (ctx.status) {
-    case 401:
-      ctx.app.emit('error', err, this);
-      break;
-    default:
-      if (err.message) {
-        ctx.body = {errors:[err.message]};
-      }
-      ctx.app.emit('error', err, this);
-    }
-  }
-});
+const app = new Koa();
+const router = require('./routes/');
+
+require('dotenv').config;
+
+app
+  .use(logger())
+  .use(bodyParser())
+  .use(cors())
+  .use(blockchain)
+  .use(router.routes())
+  .use(router.allowedMethods());
+ /*  .use(errorHandlers.notFound)
+  .use(errorHandlers.validationErrors); */
+
+//! SHOULD THESE BE MOVED?
 
 const sessions = {};
 
 const generateSid = () => {
   return '_' + Math.random().toString(36).substr(2, 9);
-}
+};
 
 app.use(async (ctx, next) => {
   let sid = ctx.headers.token;
@@ -46,19 +37,25 @@ app.use(async (ctx, next) => {
   ctx.session = sessions[sid];
   ctx.token = sid;
   return await next();
-})
+});
 
 app.use(async (ctx, next) => {
   let userId = ctx.session.userId;
   if (!userId) return await next();
   ctx.user = await userDb.getUser("userId", userId);
-  console.log("am i authorized", ctx.user)
+  console.log("am i authorized", ctx.user);
   return await next();
 });
 
-app.use(routes.routes());
+/* if (process.ENV === 'development') {
+  app.use(errorHandlers.developmentErrors);
+}
 
+app.use(errorHandlers.productionErrors); */
 
-app.listen(conf.port);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`Time Wallet API now serving → PORT ${server.address().port}`);
+});
 
-console.log(`Server listening on port ${conf.port}`);
+module.exports = app;
+
