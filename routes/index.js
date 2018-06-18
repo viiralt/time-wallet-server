@@ -32,10 +32,4 @@ router.delete('/tasks/:id', authorizeUser, tasksController.deleteTask);
 router.get('/myasktasks', authorizeUser, tasksController.getMyAskTasks);
 router.get('/mydotasks', authorizeUser, tasksController.getMyDoTasks);
 
-/* router.get('/*', () => {
-  // Catchall for not found
-  this.status = 404;
-  this.body = _404;
-});  */
-
 module.exports = router;

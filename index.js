@@ -6,6 +6,7 @@ const blockchain = require('./blockchain.js');
 
 const userDb = require('./models/usersDb.js');
 const errorHandlers = require('./handlers/errorHandlers');
+const authHandlers = require('./handlers/authHandlers');
 
 const app = new Koa();
 const router = require('./routes/');
@@ -18,9 +19,10 @@ app
   .use(cors())
   .use(blockchain)
   .use(router.routes())
-  .use(router.allowedMethods());
- /*  .use(errorHandlers.notFound)
-  .use(errorHandlers.validationErrors); */
+  .use(router.allowedMethods())
+  .use(authHandlers.authorizeUser)
+  .use(errorHandlers.notFound)
+  .use(errorHandlers.validationErrors);
 
 //! SHOULD THESE BE MOVED?
 
@@ -47,11 +49,11 @@ app.use(async (ctx, next) => {
   return await next();
 });
 
-/* if (process.ENV === 'development') {
+if (process.ENV === 'development') {
   app.use(errorHandlers.developmentErrors);
 }
 
-app.use(errorHandlers.productionErrors); */
+app.use(errorHandlers.productionErrors);
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`Time Wallet API now serving → PORT ${server.address().port}`);
