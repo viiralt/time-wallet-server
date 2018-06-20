@@ -7,6 +7,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      UserId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+        }
+      },
       postDate: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
@@ -44,7 +52,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       /* location: {
-        type: Sequelize.GEOMETRY('POINT')
+        type: Sequelize.GEOMETRY
       } */
     });
   },

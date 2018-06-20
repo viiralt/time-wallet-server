@@ -17,7 +17,7 @@ This is the repo for the server and blockchain network for Time Wallet. For more
 * to install generator-hyperledger-composer
   `npm install -g generator-hyperledger-composer@0.16.3`
   
-- IMPORTANT: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
+IMPORTANT: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
 
 ## Steps
   1. [Fork the repo](#1-fork-the-repo)

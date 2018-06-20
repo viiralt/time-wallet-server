@@ -44,13 +44,13 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     /* location: {
-      type: Sequelize.GEOMETRY('POINT')
+      type: Sequelize.GEOMETRY('POINT', 4326)
     } */
   }, {});
   Task.associate = (models) => {
     Task.belongsTo(models.User, {
       onDelete: 'CASCADE',
-      foreignKey: 'id',
+      foreignKey: 'UserId',
     });
   };
   return Task;
