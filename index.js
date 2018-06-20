@@ -4,7 +4,7 @@ const cors = require('kcors');
 const logger = require('koa-logger');
 const blockchain = require('./blockchain.js');
 
-const userDb = require('./models/usersDb.js');
+const usersDb = require('./models/usersDb.js');
 const errorHandlers = require('./handlers/errorHandlers');
 const authHandlers = require('./handlers/authHandlers');
 
@@ -17,12 +17,8 @@ app
   .use(logger())
   .use(bodyParser())
   .use(cors())
-  .use(blockchain)
-  .use(router.routes())
-  .use(router.allowedMethods())
-  .use(authHandlers.authorizeUser)
-  .use(errorHandlers.notFound)
-  .use(errorHandlers.validationErrors);
+  .use(blockchain);
+
 
 //! SHOULD THESE BE MOVED?
 
@@ -34,7 +30,9 @@ const generateSid = () => {
 
 app.use(async (ctx, next) => {
   let sid = ctx.headers.token;
+
   if (!sid) sid = await generateSid();
+
   if (!sessions[sid]) sessions[sid] = {};
   ctx.session = sessions[sid];
   ctx.token = sid;
@@ -42,12 +40,20 @@ app.use(async (ctx, next) => {
 });
 
 app.use(async (ctx, next) => {
-  let userId = ctx.session.userId;
-  if (!userId) return await next();
-  ctx.user = await userDb.getUser("userId", userId);
+  let token = ctx.token;
+  if (!token) return await next();
+  ctx.user = await usersDb.getUser("token", token);
   console.log("am i authorized", ctx.user);
+
   return await next();
 });
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
+  .use(authHandlers.authorizeUser)
+  .use(errorHandlers.notFound)
+  .use(errorHandlers.validationErrors);
 
 if (process.ENV === 'development') {
   app.use(errorHandlers.developmentErrors);
@@ -60,4 +66,3 @@ const server = app.listen(process.env.PORT || 3006, () => {
 });
 
 module.exports = app;
-

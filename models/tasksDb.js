@@ -11,22 +11,20 @@ const connection = mysql.createConnection({
 });
 
 exports.createTask = (ctx) => {
+  const userId = ctx.Id;
   const taskId = services.generateCode();
-  taskId: taskId;
-  userAsk: ctx.request.body.userAsk;
-  userDo: "";
-  location: "";
-  title: ctx.request.body.title;
-  description: ctx.request.body.description;
-  status: 'Submitted';
-  time: ctx.request.body.time;
-  userAskName: ctx.request.body.userAskName;
-
-  // ctx.request.body.taskId = taskId;
-  // ctx.request.body.userAsk = ctx.user.userId;
-  // ctx.request.body.userDo = "";
-  // ctx.request.body.status = 'Submitted';
-  const query = connection.query(`INSERT into tasks SET ?`, ctx.request.body, (error) => {
+  const task = {
+    taskId: taskId,
+    userAsk: userId,
+    userDo: "",
+    location: "",
+    title: ctx.request.body.title,
+    description: ctx.request.body.description,
+    status: 'Submitted',
+    time: ctx.request.body.time,
+    userAskName: ctx.request.body.userAskName,
+  };
+  const query = connection.query(`INSERT into tasks SET ?`, task, (error) => {
     if (error) throw error;
   });
 
@@ -82,8 +80,8 @@ exports.deleteTask = (ctx) => {
   });
 };
 
-exports.getMyAskTasks = (ctx) => {
-  const userId = ctx.user.userId;
+exports.getMyAskTasks =  (ctx) => {
+  const userId = ctx.user.userid;
   return new Promise((resolve, reject) => {
     const query = connection.query(`SELECT * from tasks WHERE userAsk = "${userId}"`, (error, results) => {
       if (error) throw error;
@@ -93,7 +91,7 @@ exports.getMyAskTasks = (ctx) => {
 };
 
 exports.getMyDoTasks = (ctx) => {
-  const userId = ctx.user.userId;
+  const userId = ctx.user.userid;
   return new Promise((resolve, reject) => {
     const query = connection.query(`SELECT * from tasks WHERE userDo = "${userId}"`, (error, results) => {
       if (error) throw error;
@@ -103,7 +101,7 @@ exports.getMyDoTasks = (ctx) => {
 };
 
 exports.searchTasks = (ctx) => {
-  const userId = ctx.user.userId;
+  const userId = ctx.user.userid;
   return new Promise((resolve, reject) => {
     const query = connection.query(`SELECT * from tasks WHERE userAsk <> "${userId}" AND status = "Submitted"`, (error, results) => {
       if (error) throw error;

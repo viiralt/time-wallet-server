@@ -67,11 +67,13 @@ exports.login = async (ctx, next) => {
     const password = userpassword[1];
     const userData = await usersDb.getUser("email", email);
     const res = bcrypt.compareSync(password, userData.password);
+    const userId = userData.userid;
+    usersDb.insertToken(userId, ctx.token);
     if (res) {
       ctx.status = 200;
-      ctx.session.userId = userData.userId;
+      ctx.session.userid = userData.userid;
       ctx.body = JSON.stringify([ctx.token, userData]);
-      console.log(userData);
+
     } else {
       ctx.status = 401;
       ctx.body = "Incorrect password";
@@ -82,12 +84,14 @@ exports.login = async (ctx, next) => {
   }
 };
 
+
+
 exports.me = async (ctx, next) => {
   if ('GET' !== ctx.method) return await next();
   console.log("hi", ctx.user);
   try {
     // Get current time balance from the blockchain
-    const walletId = ctx.user.walletId;
+    const walletId = ctx.user.wallet;
     const wallet = await ctx.businessNetwork.getAssetRegistry('org.acme.biznet.Commodity')
     .then(commodityRegistry => {return commodityRegistry.get(walletId).then(data=>data);});
     ctx.user.balance = wallet.quantity;
@@ -105,8 +109,8 @@ exports.me = async (ctx, next) => {
 
 exports.getUser = async(ctx) => {
   try {
-    const userId = ctx.params.userId;
-    const userData = await usersDb.getUser("userId", userId);
+    const userid = ctx.params.userid;
+    const userData = await usersDb.getUser("userid", userid);
     ctx.response.body = userData;
     ctx.status = 200;
   }
