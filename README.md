@@ -17,7 +17,7 @@ This is the repo for the server and blockchain network for Time Wallet. For more
 * to install generator-hyperledger-composer
   `npm install -g generator-hyperledger-composer@0.16.3`
   
-!IMPORTANT¡: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
+# IMPORTANT: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
 
 ## Steps
   1. [Fork the repo](#1-fork-the-repo)
@@ -77,7 +77,6 @@ We are ready to deploy the network to Hyperledger Fabric. First, the Hyperledger
 
 ```
 composer runtime install -c PeerAdmin@hlfv1 -n time-currency-network
-
 composer network start --card PeerAdmin@hlfv1 --networkAdmin admin --networkAdminEnrollSecret adminpw --archiveFile time-currency-network@0.0.1.bna --file networkadmin.card
 ```
 
@@ -85,9 +84,7 @@ composer network start --card PeerAdmin@hlfv1 --networkAdmin admin --networkAdmi
 
 In the terminal, run:
 
-```
-mysql --password -u root -p
-```
+`mysql --password -u root -p`
 
 When prompted, enter the mySql password, which has been set to `root`. Once connected, you should see the `mysql>` prompt. Now, run the following command:
 
@@ -102,11 +99,10 @@ nodemon
 ```
 ## 8. Perform the database migration / seeding
 
-As Time Wallet is using a relational database (MySQL), we've added database migration and seed (mock data set) tooling to get you up and running from the get go. The `package.json` already includes Sequelize, an ORM that is used to perform the migration. In your terminal, run the following commands in the root server directory: 
+Since Time Wallet is using a relational database (MySQL), we've added database migration and seed (mock data set) tooling to get you up and running from the get go. The `package.json` already includes Sequelize, an ORM that is used to perform the migration. In your terminal, run the following commands in the root server directory: 
 
 ```
 node_modules/.bin/sequelize db:migrate
-
 node_modules/.bin/sequelize db:seed:all
 ```
 
@@ -115,16 +111,23 @@ Provided there were no errors, this accomplished two things:
 - In the time_currency database you created earlier, there will be two new, interlinked tables for users and tasks
 - Both tables are populated by mock data; a set of users and associated tasks 
 
+In order to verify this, in the terminal tab that is connected to the MySQL database, run:
+
+```
+use time_currency
+describe users;
+select * from users;
+```
+
+The first command will list the table structure while the second lists all entries in it.
+
 If at any point the database table structure or mock data needs to be altered, the migration files can be found in the `/config /migrations /seeders` directories. To alter the tables, first run:
 
-```
-node_modules/.bin/sequelize db:migrate:undo:all
-```
-This will revert the database back to the original state. Once the table structure has been updated and the necessary changes made to the models, run:
+`node_modules/.bin/sequelize db:migrate:undo:all`
 
-```
-node_modules/.bin/sequelize db:migrate
-```
+This will revert the database back to the original state. Once the table structure has been updated and the necessary changes made to all the models, run:
+
+`node_modules/.bin/sequelize db:migrate`
 
 ## 9. You're ready to set up the front end!
 
