@@ -17,7 +17,7 @@ This is the repo for the server and blockchain network for Time Wallet. For more
 * to install generator-hyperledger-composer
   `npm install -g generator-hyperledger-composer@0.16.3`
   
-# IMPORTANT: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
+- IMPORTANT: if you install the latest versions of Hyperledger Composer, Composer Rest Server, and Composer CLI instead of v0.16.3, the following instructions WILL NOT work.
 
 ## Steps
   1. [Fork the repo](#1-fork-the-repo)
@@ -99,7 +99,7 @@ nodemon
 ```
 ## 8. Perform the database migration / seeding
 
-Since Time Wallet is using a relational database (MySQL), we've added database migration and seed (mock data set) tooling to get you up and running from the get go. The `package.json` already includes Sequelize, an ORM that is used to perform the migration. In your terminal, run the following commands in the root server directory: 
+Since Time Wallet is using a relational database (MySQL), we've added database migration and seed (mock data set) tooling to get you up and running. The `package.json` already includes Sequelize, an ORM that is used to perform the migration. In your terminal, run the following commands in the root server directory: 
 
 ```
 node_modules/.bin/sequelize db:migrate
@@ -108,7 +108,7 @@ node_modules/.bin/sequelize db:seed:all
 
 Provided there were no errors, this accomplished two things:
 
-- In the time_currency database you created earlier, there will be two new, interlinked tables for users and tasks
+- In the `time_currency` database you created earlier, there will be two new, interlinked tables for users and tasks
 - Both tables are populated by mock data; a set of users and associated tasks 
 
 In order to verify this, in the terminal tab that is connected to the MySQL database, run:
