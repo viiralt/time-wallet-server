@@ -14,11 +14,15 @@ module.exports = {
       taskId: {
         type: Sequelize.STRING
       },
-      taskRequestedBy: {
+      taskRequestedById: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      userTaskPool: {
+      taskRequestedByName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      taskAcceptedById: {
         type: Sequelize.STRING
       },
       status: {

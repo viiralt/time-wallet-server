@@ -13,12 +13,17 @@ module.exports = (sequelize, Sequelize) => {
     taskId: {
       type: Sequelize.STRING
     },
-    taskRequestedBy: {
+    taskRequestedById: {
       type: Sequelize.STRING,
       allowNull: false
     },
-    userTaskPool: {
-      type: Sequelize.STRING
+    taskRequestedByName: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    taskAcceptedById: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     status: {
       type: Sequelize.STRING
@@ -45,7 +50,7 @@ module.exports = (sequelize, Sequelize) => {
   Task.associate = (models) => {
     Task.belongsTo(models.User, {
       onDelete: 'CASCADE',
-      foreignKey: 'taskId',
+      foreignKey: 'id',
     });
   };
   return Task;
