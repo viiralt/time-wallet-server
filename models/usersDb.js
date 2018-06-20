@@ -9,15 +9,14 @@ const connection = mysql.createConnection({
 connection.connect();
 
 exports.addUser = (ctx) => {
-  console.log(ctx.request.body);
-  email: ctx.request.body.email;
-  password: ctx.request.body.password;
-  firstname: ctx.request.body.firstName;
-  lastname: ctx.request.body.lastName;
-  location: ctx.request.body.location;
-  balance: ctx.request.body.balance;
-  userid: ctx.request.body.userId;
-  wallet: ctx.request.body.wallet;
+  // email: ctx.request.body.email;
+  // password: ctx.request.body.password;
+  // firstname: ctx.request.body.firstName;
+  // lastname: ctx.request.body.lastName;
+  // location: ctx.request.body.location;
+  // balance: ctx.request.body.balance;
+  // userid: ctx.request.body.userId;
+  // wallet: ctx.request.body.wallet;
   const query = connection.query(`INSERT into users SET ?`, ctx.request.body, (error) => {
     if (error) throw error;
   });

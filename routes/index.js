@@ -23,12 +23,12 @@ router.get('/login', usersController.login);
 router.get('/users', usersController.getUsers);
 router.get('/users/:id', usersController.getUser);
 router.post('/users', usersController.addProfiles);
-
+router.get('/getUsers/:userList', usersController.getUsers);
 router.get('/tasks', authorizeUser, tasksController.searchTasks);
 router.post('/task', authorizeUser, tasksController.createTask);
-router.put('/tasks/:id', authorizeUser, tasksController.updateTask);
-router.delete('/tasks/:id', authorizeUser, tasksController.deleteTask);
-
+router.put('/task/:taskId', authorizeUser, tasksController.updateTask);
+router.delete('/task/:taskId', authorizeUser, tasksController.deleteTask);
+router.get('/searchTasks', authorizeUser, tasksController.searchTasks);
 router.get('/myasktasks', authorizeUser, tasksController.getMyAskTasks);
 router.get('/mydotasks', authorizeUser, tasksController.getMyDoTasks);
 

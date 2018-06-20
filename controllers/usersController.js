@@ -60,7 +60,6 @@ exports.addProfiles = async(ctx) =>{
 
 exports.login = async (ctx, next) => {
   if ('GET' != ctx.method) return await next();
-  console.log(ctx.token);
   try {
     const buff = new Buffer(ctx.headers.authorization.split(" ")[1], 'base64');
     const userpassword = buff.toString('ascii').split(":");
@@ -85,6 +84,8 @@ exports.login = async (ctx, next) => {
   }
 };
 
+
+
 exports.me = async (ctx, next) => {
   if ('GET' !== ctx.method) return await next();
   console.log("hi", ctx.user);
@@ -108,8 +109,8 @@ exports.me = async (ctx, next) => {
 
 exports.getUser = async(ctx) => {
   try {
-    const userId = ctx.params.userId;
-    const userData = await usersDb.getUser("userId", userId);
+    const userid = ctx.params.userid;
+    const userData = await usersDb.getUser("userid", userid);
     ctx.response.body = userData;
     ctx.status = 200;
   }

@@ -30,5 +30,6 @@ exports.deleteTask = (ctx) => {
 exports.searchTasks = async (ctx) => {
   const tasks = await tasksDb.searchTasks(ctx);
   ctx.body = await JSON.stringify(tasks);
+  console.log(ctx.body);
   ctx.status = 200;
 };
