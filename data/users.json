@@ -1,33 +1,28 @@
-{
-  "email": "hannahjredler@gmail.com",
-  "password": "hannahredler",
-  "firstName": "hannah",
-  "lastName": "redler",
-  "location": ""
-}
-
-{
-  "email": "john@gmail.com",
-  "password": "john",
-  "firstName": "John",
-  "lastName": "Doe",
-  "location": ""
-}, {
-  "email": "arol@gmail.com",
-  "password": "arol",
-  "firstName": "Arol",
-  "lastName": "Vinolas",
-  "location": ""
-}, {
-  "email": "ray@gmail.com",
-  "password": "ray",
-  "firstName": "Rainier",
-  "lastName": "Lewis",
-  "location": ""
-}, {
-  "email": "karsten@gmail.com",
-  "password": "karsten",
-  "firstName": "Karsten",
-  "lastName": "Balogh",
-  "location": ""
-}
+[{
+    "email": "hannahjredler@gmail.com",
+    "password": "hannahredler",
+    "firstName": "hannah",
+    "lastName": "redler",
+    "balance": 240,
+    "userId": "_idgsagsh0",
+    "wallet": "_985nvkfyv"
+  },
+  {
+    "email": "johndoe@gmail.com",
+    "password": "123",
+    "firstName": "john",
+    "lastName": "doe",
+    "balance": 240,
+    "userId": "_b8sg32fv9",
+    "wallet": "_lagabu432"
+  },
+  {
+    "email": "janedoe@gmail.com",
+    "password": "123",
+    "firstName": "jane",
+    "lastName": "doe",
+    "balance": 240,
+    "userId": "_by3sgv90m",
+    "wallet": "_mbshu7413"
+  }
+]

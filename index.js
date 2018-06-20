@@ -55,7 +55,7 @@ if (process.ENV === 'development') {
 
 app.use(errorHandlers.productionErrors);
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || 3006, () => {
   console.log(`Time Wallet API now serving → PORT ${server.address().port}`);
 });
 

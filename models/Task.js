@@ -1,10 +1,53 @@
-const taskSchema = {
-  taskId:String,
-  userAsk:String,
-  userDo:String,
-  time:Number,
-  title:String,
-  description:String,
-  // transactionId:String,
-  status:String,
+module.exports = (sequelize, Sequelize) => {
+  var Task = sequelize.define('Task', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    postDate: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    },
+    taskId: {
+      type: Sequelize.STRING
+    },
+    taskRequestedBy: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    userTaskPool: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.STRING
+    },
+    title: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    description: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    time: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    picture: {
+      type: Sequelize.STRING
+    },
+    /* location: {
+      type: Sequelize.GEOMETRY('POINT')
+    } */
+  }, {});
+  Task.associate = (models) => {
+    Task.belongsTo(models.User, {
+      onDelete: 'CASCADE',
+      foreignKey: 'taskId',
+    });
+  };
+  return Task;
 };
+

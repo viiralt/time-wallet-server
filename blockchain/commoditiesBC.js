@@ -1,4 +1,4 @@
-const services = require('../services/services.js')
+const services = require('../services/services.js');
 
 exports.addWallet = (ctx, userId) => {
   const walletId = services.generateCode();
@@ -10,9 +10,9 @@ exports.addWallet = (ctx, userId) => {
   wallet.owner = userId;
   wallet.description = "";
   ctx.businessNetwork.getAssetRegistry('org.acme.biznet.Commodity')
-  .then(commodityRegistry => {commodityRegistry.add(wallet)})
+  .then(commodityRegistry => {commodityRegistry.add(wallet);});
   return walletId;
-}
+};
 
 exports.payUser = (ctx, walletFrom, walletTo, amount) => {
 
@@ -29,7 +29,7 @@ exports.payUser = (ctx, walletFrom, walletTo, amount) => {
     'commodityFrom': walletFrom,
     'commodityTo': walletTo,
     'amount':amount,
-  })
+  });
 
   ctx.businessNetwork.submitTransaction(resource);
   // ctx.businessNetwork.businessNetwork.submitTransaction(resource);
@@ -37,4 +37,4 @@ exports.payUser = (ctx, walletFrom, walletTo, amount) => {
   // .then(registry => {
   //   console.log(registry);
   //   registry.submitTransaction(resource)})
-}
+};
