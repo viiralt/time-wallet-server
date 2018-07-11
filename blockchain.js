@@ -20,7 +20,7 @@ businessNetwork.connectWithDetails(
 )
 .catch(err => {
   console.error(err);
-})
+});
 
 
 module.exports = (ctx, next) => {
@@ -28,6 +28,6 @@ module.exports = (ctx, next) => {
   ctx.businessNetwork = businessNetwork;
 
   return next();
-}
+};
 
 // module.exports = TradersController;
